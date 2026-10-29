@@ -185,7 +185,7 @@
         </tr>
         <tr>
           <td class="k">收件埠號</td>
-          <td><span class="val port">993</span>　加密：<strong>SSL</strong></td>
+          <td><span class="val port">993</span>　加密：<strong>SSL</strong><br><span class="muted">iPhone：SSL 要「<strong>開啟</strong>」</span></td>
         </tr>
         <tr>
           <td class="k">寄件伺服器<br><span class="muted">SMTP</span></td>
@@ -193,7 +193,7 @@
         </tr>
         <tr>
           <td class="k">寄件埠號</td>
-          <td><span class="val port">587</span>　加密：<strong>STARTTLS</strong></td>
+          <td><span class="val port">587</span>　加密：<strong>STARTTLS</strong><br><span class="muted">iPhone：SSL 要「<strong>關閉</strong>」／Android：選 STARTTLS</span></td>
         </tr>
         <tr>
           <td class="k">帳號</td>
@@ -219,17 +219,21 @@
       <div class="tip" style="margin:0 0 14px;">
         <strong>⚠️ iPhone 實測提醒（重要）</strong><br>
         iOS 的<strong>自動偵測會失敗</strong>，不要讓它自己找，一定要走「<strong>其他 → 加入郵件帳號</strong>」手動填。<br>
-        每一步都要自己選對，尤其<strong>帳號要填完整信箱</strong>、加密要選 <strong>SSL</strong> 和 <strong>STARTTLS</strong>。
+        每一步都要自己選對，尤其<strong>帳號要填完整信箱</strong>、收件 SSL 要<strong>開</strong>、寄件 SSL 要<strong>關</strong>。
       </div>
       <ol class="steps">
         <li>開啟 <strong>設定</strong> → 往下找到 <strong>郵件</strong></li>
         <li>點 <strong>帳號</strong> → <strong>加入帳號</strong></li>
         <li>選最下面的 <strong>其他</strong> → 點 <strong>加入郵件帳號</strong></li>
         <li>填「電子郵件」= 公司信箱、「密碼」= 信箱密碼 → 下一步</li>
-        <li>選 <strong>IMAP</strong>，收件伺服器填 <span class="val">imap.hibox.biz</span>、埠 <span class="val port">993</span>、加密選 <strong>SSL</strong></li>
-        <li>寄件伺服器填 <span class="val">smtp.hibox.biz</span>、埠 <span class="val port">587</span>、加密選 <strong>STARTTLS</strong></li>
+        <li>選 <strong>IMAP</strong>，收件伺服器填 <span class="val">imap.hibox.biz</span>、埠 <span class="val port">993</span>，把 <strong>SSL 打開</strong></li>
+        <li>寄件伺服器填 <span class="val">smtp.hibox.biz</span>、埠 <span class="val port">587</span>，<strong>SSL 保持關閉</strong>（不要打開）</li>
         <li>右上角 <strong>儲存</strong> → 完成</li>
       </ol>
+      <div class="tip" style="margin-top:14px;">
+        <strong>🔑 最關鍵的一步：寄件 SSL 要「關閉」</strong><br>
+        iOS 沒有「STARTTLS」這個選項，只有一個「SSL」開關。<strong>收件(993) 開、寄件(587) 關</strong>——寄件若把 SSL 打開，會變成直接對 587 硬加密，握手失敗，結果就是<strong>能收信、寄不出去</strong>。
+      </div>
     </div>
   </section>
 
@@ -264,7 +268,10 @@
 
     <details>
       <summary>可以收信，但寄不出去</summary>
-      <p>九成是寄件埠設錯。寄件一定要 <strong>smtp.hibox.biz</strong>、埠 <strong>587</strong>、加密 <strong>STARTTLS</strong>。改成 465 會失敗。</p>
+      <p>九成是寄件埠或加密設定錯。寄件一定要 <strong>smtp.hibox.biz</strong>、埠 <strong>587</strong>：
+      <br>• <strong>iPhone</strong>：SSL 要<strong>關閉</strong>（開著會握手失敗，寄不出去）
+      <br>• <strong>Android</strong>：安全類型選 <strong>STARTTLS</strong>
+      <br>改成 <strong>465</strong> 也會失敗（hiBox 沒開這個埠）。</p>
     </details>
 
     <details>
