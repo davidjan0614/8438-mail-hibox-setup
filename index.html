@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hiBox 手機信箱設定｜iPhone / Android</title>
+<style>
+  :root{
+    --blue:#2563eb; --blue-deep:#1e3a8a; --blue-soft:#dbeafe;
+    --green:#059669; --green-deep:#065f46; --green-soft:#d1fae5;
+    --orange:#ea580c; --orange-soft:#ffedd5;
+    --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+    --bg:#f1f5f9; --card:#ffffff;
+    --radius:18px;
+    --shadow:0 4px 6px -1px rgb(15 23 42 / .07), 0 12px 28px -6px rgb(15 23 42 / .12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.75;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 56px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 45%,#0ea5e9 100%);
+    color:#fff;padding:44px 24px 52px;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:auto -20% -60% -20%;height:160px;
+    background:var(--bg);border-radius:50% 50% 0 0;
+  }
+  .hero-badge{
+    display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+    padding:5px 14px;border-radius:99px;font-size:.78rem;letter-spacing:.14em;
+    font-weight:700;margin-bottom:16px;backdrop-filter:blur(4px);
+  }
+  .hero h1{font-size:clamp(1.55rem,5vw,2.1rem);font-weight:800;letter-spacing:.02em;line-height:1.35;}
+  .hero p{margin-top:10px;font-size:.95rem;opacity:.92;}
+  .hero-emoji{font-size:2.1rem;display:block;margin-bottom:6px;}
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:24px;margin-top:-24px;position:relative;z-index:2;
+  }
+  .card + .card{margin-top:20px;}
+
+  h2{
+    font-size:1.12rem;font-weight:800;display:flex;align-items:center;gap:9px;
+    padding-bottom:12px;border-bottom:2px solid var(--line);margin-bottom:18px;
+  }
+  h2 .num{
+    flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+    font-size:.9rem;color:#fff;background:var(--blue);font-weight:800;
+  }
+  h3{font-size:.98rem;font-weight:800;margin:20px 0 10px;color:var(--blue-deep);}
+  h3:first-of-type{margin-top:0;}
+  p,li{font-size:.94rem;}
+  .muted{color:var(--muted);font-size:.85rem;}
+
+  /* ---------- 參數表 ---------- */
+  .params{
+    width:100%;border-collapse:separate;border-spacing:0;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:8px;
+  }
+  .params th,.params td{padding:12px 14px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line);}
+  .params thead th{background:#f8fafc;font-weight:800;font-size:.82rem;color:var(--muted);letter-spacing:.05em;}
+  .params tbody tr:last-child td{border-bottom:none;}
+  .params .k{font-weight:700;width:38%;}
+  .val{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;color:var(--blue-deep);
+       background:var(--blue-soft);padding:2px 7px;border-radius:6px;font-size:.86rem;white-space:nowrap;}
+  .port{color:var(--orange);font-weight:800;}
+
+  /* ---------- 平台卡 ---------- */
+  .platform{border-radius:14px;padding:18px;margin-top:14px;border:2px solid;}
+  .platform.ios{border-color:#bfdbfe;background:linear-gradient(180deg,#f0f7ff,#fff);}
+  .platform.android{border-color:#a7f3d0;background:linear-gradient(180deg,#f0fdf9,#fff);}
+  .platform .ptitle{display:flex;align-items:center;gap:9px;font-weight:800;font-size:1.02rem;margin-bottom:12px;}
+  .platform.ios .ptitle{color:var(--blue-deep);}
+  .platform.android .ptitle{color:var(--green-deep);}
+  .platform ol{margin:0;padding-left:1.35em;}
+  .platform ol li{margin-bottom:6px;}
+
+  /* ---------- 步驟 ---------- */
+  .steps{counter-reset:s;list-style:none;padding:0;}
+  .steps li{
+    position:relative;padding-left:38px;margin-bottom:13px;font-size:.93rem;
+    counter-increment:s;
+  }
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;
+    width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;
+    display:grid;place-items:center;font-size:.8rem;font-weight:800;
+  }
+
+  /* ---------- 提示框 ---------- */
+  .tip{
+    border-left:4px solid var(--orange);background:var(--orange-soft);
+    border-radius:0 10px 10px 0;padding:13px 16px;margin-top:16px;font-size:.9rem;
+  }
+  .tip strong{color:#9a3412;}
+  .ok{border-left-color:var(--green);background:var(--green-soft);}
+  .ok strong{color:var(--green-deep);}
+
+  /* ---------- 推薦橫幅 ---------- */
+  .best{
+    background:linear-gradient(135deg,#065f46,#059669);color:#fff;
+    border-radius:14px;padding:18px 20px;margin-top:4px;
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  .best .ico{font-size:1.7rem;flex:none;line-height:1;}
+  .best b{display:block;font-size:1rem;margin-bottom:3px;}
+  .best span{font-size:.88rem;opacity:.95;}
+
+  /* ---------- FAQ ---------- */
+  details{
+    border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    margin-bottom:10px;background:#fcfdff;
+  }
+  details[open]{border-color:#bfdbfe;background:#f8fbff;}
+  summary{
+    font-weight:800;font-size:.93rem;cursor:pointer;list-style:none;
+    display:flex;justify-content:space-between;gap:12px;align-items:center;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"＋";color:var(--blue);font-weight:800;font-size:1.1rem;flex:none;}
+  details[open] summary::after{content:"－";}
+  details p{margin-top:10px;font-size:.9rem;color:#334155;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;padding:32px 16px 0;color:var(--muted);font-size:.8rem;
+  }
+  footer .brand{font-weight:800;color:var(--blue-deep);letter-spacing:.08em;}
+
+  @media (max-width:520px){
+    .card{padding:20px 16px;}
+    .params th,.params td{padding:10px;font-size:.85rem;}
+    .params .k{width:44%;}
+    .val{font-size:.8rem;}
+  }
+  @media print{
+    body{background:#fff;}
+    .hero{padding:24px;}
+    .card{box-shadow:none;border:1px solid var(--line);margin-top:16px;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="hero-badge">昶昕實業 · MIS</span>
+  <span class="hero-emoji">📱</span>
+  <h1>hiBox 手機信箱設定</h1>
+  <p>iPhone / Android 一次搞定 · 照著做 3 分鐘完成</p>
+</header>
+
+<div class="wrap">
+
+  <!-- 最省事 -->
+  <section class="card">
+    <div class="best">
+      <span class="ico">👍</span>
+      <div>
+        <b>最省事：直接裝 App</b>
+        <span>App Store / Google Play 搜尋「<strong>hiBox全能信箱</strong>」→ 安裝 → 用公司信箱帳密登入。不用填任何伺服器參數。</span>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:14px;">若 App 裝不起來、或想用系統內建的信箱 App，再往下看手動設定。</p>
+  </section>
+
+  <!-- 共用參數 -->
+  <section class="card">
+    <h2><span class="num">1</span>共用參數（iPhone、Android 都一樣）</h2>
+    <table class="params">
+      <thead>
+        <tr><th>項目</th><th>填入值</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="k">收件伺服器<br><span class="muted">IMAP</span></td>
+          <td><span class="val">imap.hibox.biz</span></td>
+        </tr>
+        <tr>
+          <td class="k">收件埠號</td>
+          <td><span class="val port">993</span>　加密：<strong>SSL</strong></td>
+        </tr>
+        <tr>
+          <td class="k">寄件伺服器<br><span class="muted">SMTP</span></td>
+          <td><span class="val">smtp.hibox.biz</span></td>
+        </tr>
+        <tr>
+          <td class="k">寄件埠號</td>
+          <td><span class="val port">587</span>　加密：<strong>STARTTLS</strong></td>
+        </tr>
+        <tr>
+          <td class="k">帳號</td>
+          <td>你的<strong>完整公司信箱</strong></td>
+        </tr>
+        <tr>
+          <td class="k">密碼</td>
+          <td>你的信箱密碼</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip">
+      <strong>⚠️ 兩個數字一定要對</strong><br>
+      收件 <span class="port">993</span>、寄件 <span class="port">587</span>。寄件填 465 <strong>不會通</strong>（hiBox 沒開這個埠）。
+    </div>
+  </section>
+
+  <!-- iPhone -->
+  <section class="card">
+    <h2><span class="num">2</span>iPhone 設定步驟</h2>
+    <div class="platform ios">
+      <div class="ptitle">🍎 用內建「郵件」App</div>
+      <div class="tip" style="margin:0 0 14px;">
+        <strong>⚠️ iPhone 實測提醒（重要）</strong><br>
+        iOS 的<strong>自動偵測會失敗</strong>，不要讓它自己找，一定要走「<strong>其他 → 加入郵件帳號</strong>」手動填。<br>
+        每一步都要自己選對，尤其<strong>帳號要填完整信箱</strong>、加密要選 <strong>SSL</strong> 和 <strong>STARTTLS</strong>。
+      </div>
+      <ol class="steps">
+        <li>開啟 <strong>設定</strong> → 往下找到 <strong>郵件</strong></li>
+        <li>點 <strong>帳號</strong> → <strong>加入帳號</strong></li>
+        <li>選最下面的 <strong>其他</strong> → 點 <strong>加入郵件帳號</strong></li>
+        <li>填「電子郵件」= 公司信箱、「密碼」= 信箱密碼 → 下一步</li>
+        <li>選 <strong>IMAP</strong>，收件伺服器填 <span class="val">imap.hibox.biz</span>、埠 <span class="val port">993</span>、加密選 <strong>SSL</strong></li>
+        <li>寄件伺服器填 <span class="val">smtp.hibox.biz</span>、埠 <span class="val port">587</span>、加密選 <strong>STARTTLS</strong></li>
+        <li>右上角 <strong>儲存</strong> → 完成</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Android -->
+  <section class="card">
+    <h2><span class="num">3</span>Android 設定步驟</h2>
+    <div class="platform android">
+      <div class="ptitle">🤖 用 Gmail App（或手機內建 Email）</div>
+      <ol class="steps">
+        <li>開啟 <strong>Gmail</strong> → 右上角頭像 → <strong>新增其他帳號</strong></li>
+        <li>帳號類型選 <strong>其他（Other）</strong></li>
+        <li>輸入公司信箱 → 選 <strong>IMAP</strong>（不要選 POP3）</li>
+        <li>密碼填信箱密碼</li>
+        <li>收件伺服器 <span class="val">imap.hibox.biz</span>／埠 <span class="val port">993</span>／安全類型 <strong>SSL</strong></li>
+        <li>寄件伺服器 <span class="val">smtp.hibox.biz</span>／埠 <span class="val port">587</span>／安全類型 <strong>STARTTLS</strong></li>
+        <li>點 <strong>下一步</strong> → 完成</li>
+      </ol>
+      <div class="tip" style="margin-top:14px;">
+        <strong>小提醒</strong>：若出現「憑證／安全性警告」，選 <strong>接受</strong> 即可。
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="card">
+    <h2><span class="num">4</span>常見問題排除</h2>
+
+    <details>
+      <summary>我們以前用 mailsvr.persee.com.tw，現在還能用嗎？</summary>
+      <p><strong>不行了。</strong>切換到 hiBox 後，舊的 <code>mailsvr.persee.com.tw</code> 已經<strong>停止收發</strong>。手機／電腦一律改成：收件 <strong>imap.hibox.biz</strong>（993 SSL）、寄件 <strong>smtp.hibox.biz</strong>（587 STARTTLS）。舊設定留著會出現「連不上伺服器」。</p>
+    </details>
+
+    <details>
+      <summary>可以收信，但寄不出去</summary>
+      <p>九成是寄件埠設錯。寄件一定要 <strong>smtp.hibox.biz</strong>、埠 <strong>587</strong>、加密 <strong>STARTTLS</strong>。改成 465 會失敗。</p>
+    </details>
+
+    <details>
+      <summary>一直跳出「密碼錯誤」</summary>
+      <p>請確認：① 帳號要填<strong>完整信箱</strong>（不是只填前面的名字）② 大小寫要對 ③ 若近期改過密碼，手機要重新輸入。仍不行請找 MIS 確認帳號狀態。</p>
+    </details>
+
+    <details>
+      <summary>完全收不到新信</summary>
+      <p>先確認電腦的 Webmail 收得到（代表伺服器正常）。若 Webmail 有信、手機沒有，通常是手機設定選成了 <strong>POP3</strong>，請改用 <strong>IMAP</strong>。</p>
+    </details>
+
+    <details>
+      <summary>要選 IMAP 還是 POP3？</summary>
+      <p><strong>選 IMAP</strong>。信件會留在伺服器，手機、電腦、Webmail 看到的都一樣。POP3 會把信抓到單一裝置，容易發生「這台有、那台沒有」。</p>
+    </details>
+
+    <details>
+      <summary>裝 App 比較好還是用內建郵件？</summary>
+      <p>只是要收發信 → <strong>裝 App 最快</strong>（不用填參數）。要跟手機行事曆／聯絡人整合 → 用<strong>內建郵件</strong>。</p>
+    </details>
+  </section>
+
+  <footer>
+    <p class="brand">昶昕實業 · 資訊部 MIS</p>
+    <p style="margin-top:6px;">hiBox 手機設定說明 · 有問題請洽 MIS 分機</p>
+  </footer>
+
+</div>
+</body>
+</html>
