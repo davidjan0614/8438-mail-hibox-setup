@@ -124,6 +124,20 @@
   .best .ico{font-size:1.7rem;flex:none;line-height:1;}
   .best b{display:block;font-size:1rem;margin-bottom:3px;}
   .best span{font-size:.88rem;opacity:.95;}
+  .btn-go{
+    display:block;margin-top:16px;text-align:center;text-decoration:none;
+    background:#fff;color:#065f46;font-weight:900;font-size:1rem;
+    padding:14px 18px;border-radius:12px;
+    box-shadow:0 5px 16px rgba(0,0,0,.22);
+    transition:transform .12s ease;
+  }
+  .btn-go:active{transform:scale(.97);}
+  .safari-warn{
+    margin-top:12px;font-size:.8rem;line-height:1.65;
+    background:rgba(255,255,255,.15);border-radius:9px;
+    padding:10px 12px;color:#fff;
+  }
+  .safari-warn strong{color:#fef3c7;}
 
   /* ---------- FAQ ---------- */
   details{
@@ -176,7 +190,9 @@
       <span class="ico">⚡</span>
       <div>
         <b>最省事：iPhone 用「一鍵自動設定」</b>
-        <span>打開 <strong>hibox-phone-8438.onrender.com</strong> → 填公司信箱 → 照畫面按「允許／安裝」→ 完成。<strong>不用抄任何伺服器參數</strong>，最快也最不會填錯。</span>
+        <span>填公司信箱 → 照畫面按「允許／安裝」→ 完成。<strong>不用抄任何伺服器參數</strong>，最快也最不會填錯。</span>
+        <a class="btn-go" href="https://hibox-phone-8438.onrender.com" target="_blank" rel="noopener">👉 點我開啟一鍵自動設定</a>
+        <div class="safari-warn">⚠️ iPhone 請用 <strong>Safari</strong> 開（不要用 LINE 或 FB 的內建瀏覽器，會無法產生設定檔）。若點按鈕後打不開，請在 Safari 網址列輸入 <strong>hibox-phone-8438.onrender.com</strong></div>
       </div>
     </div>
     <p class="muted" style="margin-top:14px;">Android 手機請直接用下面的手動步驟（自動設定目前只支援 iPhone）。</p>
@@ -302,6 +318,14 @@
     <details>
       <summary>要選 IMAP 還是 POP3？</summary>
       <p><strong>選 IMAP</strong>。信件會留在伺服器，手機、電腦、Webmail 看到的都一樣。POP3 會把信抓到單一裝置，容易發生「這台有、那台沒有」。</p>
+    </details>
+
+    <details>
+      <summary>按了「一鍵自動設定」，畫面卻說「請先以 Safari 開啟」</summary>
+      <p>因為 LINE、Facebook、Instagram 的<strong>內建瀏覽器</strong>無法下載 iPhone 描述檔。解法：<br>
+      ① 複製網址 <strong>hibox-phone-8438.onrender.com</strong><br>
+      ② 打開手機的 <strong>Safari</strong>，貼到網址列<br>
+      ③ 在 Safari 裡重新操作一次，就能下載安裝</p>
     </details>
 
     <details>
