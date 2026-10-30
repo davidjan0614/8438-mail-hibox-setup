@@ -70,19 +70,24 @@
   h3:first-of-type{margin-top:0;}
   p,li{font-size:.94rem;}
   .muted{color:var(--muted);font-size:.85rem;}
+  code{
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.86em;
+    background:#eef2f7;padding:2px 6px;border-radius:5px;color:var(--blue-deep);
+  }
 
   /* ---------- 參數表 ---------- */
   .params{
     width:100%;border-collapse:separate;border-spacing:0;
     border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:8px;
   }
-  .params th,.params td{padding:12px 14px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line);}
+  .params th,.params td{padding:12px 14px;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line);vertical-align:top;}
   .params thead th{background:#f8fafc;font-weight:800;font-size:.82rem;color:var(--muted);letter-spacing:.05em;}
   .params tbody tr:last-child td{border-bottom:none;}
-  .params .k{font-weight:700;width:38%;}
+  .params .k{font-weight:700;width:34%;}
   .val{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;color:var(--blue-deep);
        background:var(--blue-soft);padding:2px 7px;border-radius:6px;font-size:.86rem;white-space:nowrap;}
   .port{color:var(--orange);font-weight:800;}
+  .sub-note{display:block;margin-top:4px;}
 
   /* ---------- 平台卡 ---------- */
   .platform{border-radius:14px;padding:18px;margin-top:14px;border:2px solid;}
@@ -91,8 +96,6 @@
   .platform .ptitle{display:flex;align-items:center;gap:9px;font-weight:800;font-size:1.02rem;margin-bottom:12px;}
   .platform.ios .ptitle{color:var(--blue-deep);}
   .platform.android .ptitle{color:var(--green-deep);}
-  .platform ol{margin:0;padding-left:1.35em;}
-  .platform ol li{margin-bottom:6px;}
 
   /* ---------- 步驟 ---------- */
   .steps{counter-reset:s;list-style:none;padding:0;}
@@ -105,6 +108,8 @@
     width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;
     display:grid;place-items:center;font-size:.8rem;font-weight:800;
   }
+  .platform.android .steps li::before{background:var(--green);}
+  .steps li b{color:var(--ink);}
 
   /* ---------- 提示框 ---------- */
   .tip{
@@ -114,6 +119,8 @@
   .tip strong{color:#9a3412;}
   .ok{border-left-color:var(--green);background:var(--green-soft);}
   .ok strong{color:var(--green-deep);}
+  .info{border-left-color:var(--blue);background:var(--blue-soft);}
+  .info strong{color:var(--blue-deep);}
 
   /* ---------- 推薦橫幅 ---------- */
   .best{
@@ -153,6 +160,8 @@
   summary::after{content:"＋";color:var(--blue);font-weight:800;font-size:1.1rem;flex:none;}
   details[open] summary::after{content:"－";}
   details p{margin-top:10px;font-size:.9rem;color:#334155;}
+  details p + p{margin-top:8px;}
+  details a{color:var(--blue);word-break:break-all;}
 
   /* ---------- Footer ---------- */
   footer{
@@ -163,8 +172,9 @@
   @media (max-width:520px){
     .card{padding:20px 16px;}
     .params th,.params td{padding:10px;font-size:.85rem;}
-    .params .k{width:44%;}
+    .params .k{width:40%;}
     .val{font-size:.8rem;}
+    .best{padding:16px;}
   }
   @media print{
     body{background:#fff;}
@@ -179,12 +189,12 @@
   <span class="hero-badge">昶昕實業 · MIS</span>
   <span class="hero-emoji">📱</span>
   <h1>hiBox 手機信箱設定</h1>
-  <p>iPhone / Android 一次搞定 · 照著做 3 分鐘完成</p>
+  <p>iPhone / Android 一次搞定</p>
 </header>
 
 <div class="wrap">
 
-  <!-- 最省事 -->
+  <!-- ============ 最省事：iPhone 一鍵 ============ -->
   <section class="card">
     <div class="best">
       <span class="ico">⚡</span>
@@ -192,7 +202,10 @@
         <b>最省事：iPhone 用「一鍵自動設定」</b>
         <span>填公司信箱 → 照畫面按「允許／安裝」→ 完成。<strong>不用抄任何伺服器參數</strong>，最快也最不會填錯。</span>
         <a class="btn-go" href="https://hibox-phone-8438.onrender.com" target="_blank" rel="noopener">👉 點我開啟一鍵自動設定</a>
-        <div class="safari-warn">⚠️ iPhone 請用 <strong>Safari</strong> 開（不要用 LINE 或 FB 的內建瀏覽器，會無法產生設定檔）。若點按鈕後打不開，請在 Safari 網址列輸入 <strong>hibox-phone-8438.onrender.com</strong></div>
+        <div class="safari-warn">
+          ⚠️ iPhone 請用 <strong>Safari</strong> 開（不要用 LINE 或 FB 的內建瀏覽器，會無法產生設定檔）。<br>
+          在 LINE 裡點按鈕後若打不開，請點右上角「⋯」→「<strong>用 Safari 開啟</strong>」。
+        </div>
       </div>
     </div>
     <p class="muted" style="margin-top:14px;">Android 手機請直接用下面的手動步驟（自動設定目前只支援 iPhone）。</p>
@@ -202,7 +215,7 @@
     </div>
   </section>
 
-  <!-- 共用參數 -->
+  <!-- ============ 共用參數 ============ -->
   <section class="card">
     <h2><span class="num">1</span>共用參數（iPhone、Android 都一樣）</h2>
     <table class="params">
@@ -216,7 +229,8 @@
         </tr>
         <tr>
           <td class="k">收件埠號</td>
-          <td><span class="val port">993</span>　加密：<strong>SSL</strong><br><span class="muted">iPhone：SSL 要「<strong>開啟</strong>」</span></td>
+          <td><span class="val port">993</span>　加密：<strong>SSL</strong>
+            <span class="sub-note muted">iPhone：SSL「<strong>開啟</strong>」</span></td>
         </tr>
         <tr>
           <td class="k">寄件伺服器<br><span class="muted">SMTP</span></td>
@@ -224,11 +238,12 @@
         </tr>
         <tr>
           <td class="k">寄件埠號</td>
-          <td><span class="val port">587</span>　加密：<strong>STARTTLS</strong><br><span class="muted">iPhone：SSL 要「<strong>關閉</strong>」／Android：選 STARTTLS</span></td>
+          <td><span class="val port">587</span>　加密：<strong>STARTTLS</strong>
+            <span class="sub-note muted">iPhone：SSL「<strong>關閉</strong>」／Android：選 STARTTLS</span></td>
         </tr>
         <tr>
           <td class="k">帳號</td>
-          <td>你的<strong>完整公司信箱</strong></td>
+          <td>你的<strong>完整公司信箱</strong>（含 @ 後面）</td>
         </tr>
         <tr>
           <td class="k">密碼</td>
@@ -240,103 +255,127 @@
       <strong>⚠️ 兩個數字一定要對</strong><br>
       收件 <span class="port">993</span>、寄件 <span class="port">587</span>。寄件填 465 <strong>不會通</strong>（hiBox 沒開這個埠）。
     </div>
+    <div class="info tip">
+      <strong>📌 以前的舊主機不能用了</strong><br>
+      切換到 hiBox 後，舊的 <code>mailsvr.persee.com.tw</code> 已停止收發。手機／電腦都要改成 <code>imap.hibox.biz</code> / <code>smtp.hibox.biz</code>。
+    </div>
   </section>
 
-  <!-- iPhone -->
+  <!-- ============ iPhone 手動 ============ -->
   <section class="card">
-    <h2><span class="num">2</span>iPhone 設定步驟</h2>
+    <h2><span class="num">2</span>iPhone 手動設定</h2>
     <div class="platform ios">
       <div class="ptitle">🍎 用內建「郵件」App</div>
-      <div class="tip" style="margin:0 0 14px;">
-        <strong>⚠️ iPhone 實測提醒（重要）</strong><br>
-        iOS 的<strong>自動偵測會失敗</strong>，不要讓它自己找，一定要走「<strong>其他 → 加入郵件帳號</strong>」手動填。<br>
-        每一步都要自己選對，尤其<strong>帳號要填完整信箱</strong>、收件 SSL 要<strong>開</strong>、寄件 SSL 要<strong>關</strong>。
+
+      <div class="tip" style="margin:0 0 16px;">
+        <strong>⚠️ 先確認你的 iOS 版本，路徑不一樣！</strong><br>
+        <strong>iOS 18 以上</strong>：設定 → <strong>App</strong> → 郵件 → 郵件帳號<br>
+        <strong>iOS 17 以前</strong>：設定 → 往下滑找「<strong>郵件</strong>」→ 帳號<br>
+        <span class="muted">（找不到「郵件」在哪，就是這個原因。先找「App」那一項。）</span>
       </div>
+
+      <h3>① 加入帳號</h3>
       <ol class="steps">
-        <li>開啟 <strong>設定</strong> → 往下找到 <strong>郵件</strong></li>
-        <li>點 <strong>帳號</strong> → <strong>加入帳號</strong></li>
-        <li>選最下面的 <strong>其他</strong> → 點 <strong>加入郵件帳號</strong></li>
-        <li>填「電子郵件」= 公司信箱、「密碼」= 信箱密碼 → 下一步</li>
-        <li>選 <strong>IMAP</strong>，收件伺服器填 <span class="val">imap.hibox.biz</span>、埠 <span class="val port">993</span>，把 <strong>SSL 打開</strong></li>
-        <li>寄件伺服器填 <span class="val">smtp.hibox.biz</span>、埠 <span class="val port">587</span>，<strong>SSL 保持關閉</strong>（不要打開）</li>
-        <li>右上角 <strong>儲存</strong> → 完成</li>
+        <li>開啟 <strong>設定</strong> → 點「<strong>App</strong>」→「<strong>郵件</strong>」（iOS 17 以前：設定 → 郵件）</li>
+        <li>點「<strong>郵件帳號</strong>」→「<strong>加入帳號</strong>」</li>
+        <li>選「<strong>其他</strong>」→ 點「<strong>加入郵件帳號</strong>」</li>
+        <li>填寫：名稱（自己看得懂就好）、電子郵件（<strong>完整公司信箱</strong>）、密碼、描述（例：公司信箱）→ 點「<strong>下一步</strong>」</li>
+        <li>選「<strong>IMAP</strong>」（不要選 POP）</li>
+        <li>收件伺服器：主機名稱 <span class="val">imap.hibox.biz</span>、使用者名稱（<strong>完整信箱</strong>）、密碼</li>
+        <li>寄件伺服器：主機名稱 <span class="val">smtp.hibox.biz</span>、使用者名稱、密碼</li>
+        <li>點右上角「<strong>儲存</strong>」</li>
       </ol>
-      <div class="tip" style="margin-top:14px;">
-        <strong>🔑 最關鍵的一步：寄件 SSL 要「關閉」</strong><br>
-        iOS 沒有「STARTTLS」這個選項，只有一個「SSL」開關。<strong>收件(993) 開、寄件(587) 關</strong>——寄件若把 SSL 打開，會變成直接對 587 硬加密，握手失敗，結果就是<strong>能收信、寄不出去</strong>。
+
+      <h3>② 如果寄不出去，再進「進階」改這兩個</h3>
+      <p class="muted" style="margin-bottom:10px;">初次設定時 iOS 常常不會讓你填埠號，它會自己猜。猜錯就會「能收不能寄」，所以要進進階檢查。</p>
+      <ol class="steps">
+        <li>設定 → App → 郵件 → 郵件帳號 → 點剛加的那個帳號</li>
+        <li>點「<strong>帳號</strong>」→ 拉到最下面點「<strong>進階</strong>」</li>
+        <li>收件伺服器：伺服器埠號改 <span class="val port">993</span>，<strong>SSL 打開</strong></li>
+        <li>點「<strong>寄件伺服器</strong>」→「<strong>主要伺服器</strong>」</li>
+        <li>伺服器埠號改 <span class="val port">587</span>，<strong>SSL 關閉</strong></li>
+        <li>左上「&lt; 進階」→ 右上「<strong>完成</strong>」</li>
+      </ol>
+
+      <div class="tip" style="margin-top:16px;">
+        <strong>🔑 最關鍵：寄件 SSL 要「關閉」</strong><br>
+        iOS 沒有「STARTTLS」這個選項，只有一個「SSL」開關。<strong>收件(993) 開、寄件(587) 關</strong>。<br>
+        寄件若把 SSL 打開，會變成直接對 587 硬加密 → 握手失敗 → <strong>能收信、寄不出去</strong>。
       </div>
     </div>
   </section>
 
-  <!-- Android -->
+  <!-- ============ Android ============ -->
   <section class="card">
-    <h2><span class="num">3</span>Android 設定步驟</h2>
+    <h2><span class="num">3</span>Android 手動設定</h2>
     <div class="platform android">
       <div class="ptitle">🤖 用 Gmail App（或手機內建 Email）</div>
       <ol class="steps">
-        <li>開啟 <strong>Gmail</strong> → 右上角頭像 → <strong>新增其他帳號</strong></li>
-        <li>帳號類型選 <strong>其他（Other）</strong></li>
-        <li>輸入公司信箱 → 選 <strong>IMAP</strong>（不要選 POP3）</li>
-        <li>密碼填信箱密碼</li>
-        <li>收件伺服器 <span class="val">imap.hibox.biz</span>／埠 <span class="val port">993</span>／安全類型 <strong>SSL</strong></li>
-        <li>寄件伺服器 <span class="val">smtp.hibox.biz</span>／埠 <span class="val port">587</span>／安全類型 <strong>STARTTLS</strong></li>
-        <li>點 <strong>下一步</strong> → 完成</li>
+        <li>開啟 <strong>Gmail</strong> → 點右上角「<strong>頭像</strong>」→「<strong>新增其他帳戶</strong>」</li>
+        <li>帳號類型選「<strong>其他</strong>」</li>
+        <li>輸入<strong>完整公司信箱</strong> → 下一步</li>
+        <li>選「<strong>個人 (IMAP)</strong>」（不要選 POP3）</li>
+        <li>輸入信箱密碼 → 下一步</li>
+        <li>收件伺服器：<span class="val">imap.hibox.biz</span>／埠 <span class="val port">993</span>／安全類型 <strong>SSL/TLS</strong></li>
+        <li>寄件伺服器：<span class="val">smtp.hibox.biz</span>／埠 <span class="val port">587</span>／安全類型 <strong>STARTTLS</strong></li>
+        <li>點「<strong>下一步</strong>」→ 帳戶選項可跳過 → 完成</li>
       </ol>
       <div class="tip" style="margin-top:14px;">
-        <strong>小提醒</strong>：若出現「憑證／安全性警告」，選 <strong>接受</strong> 即可。
+        <strong>小提醒</strong>：若出現「憑證／安全性警告」，選「<strong>接受</strong>」即可。
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- ============ FAQ ============ -->
   <section class="card">
     <h2><span class="num">4</span>常見問題排除</h2>
 
     <details>
-      <summary>我們以前用 mailsvr.persee.com.tw，現在還能用嗎？</summary>
-      <p><strong>不行了。</strong>切換到 hiBox 後，舊的 <code>mailsvr.persee.com.tw</code> 已經<strong>停止收發</strong>。手機／電腦一律改成：收件 <strong>imap.hibox.biz</strong>（993 SSL）、寄件 <strong>smtp.hibox.biz</strong>（587 STARTTLS）。舊設定留著會出現「連不上伺服器」。</p>
+      <summary>hiBox 的 App 還能下載嗎？</summary>
+      <p><strong>已經沒有了。</strong>中華電信原本的「hiBox全能信箱」App <strong>已從 App Store 下架</strong>，商店搜不到、舊連結也失效（這是很多人卡住的原因）。iPhone 請用最上面的<strong>一鍵自動設定</strong>；Android 請照上面的手動步驟。</p>
+    </details>
+
+    <details>
+      <summary>按了「一鍵自動設定」，卻說要我用 Safari</summary>
+      <p>因為 LINE、Facebook、Instagram 的<strong>內建瀏覽器</strong>無法下載 iPhone 的設定描述檔。解法：</p>
+      <p>① 在 LINE 裡點右上角「⋯」→「<strong>用 Safari 開啟</strong>」<br>
+      ② 或複製網址 <code>hibox-phone-8438.onrender.com</code>，自己開 Safari 貼到網址列<br>
+      ③ 在 Safari 裡重新操作一次，就會出現「允許」下載</p>
     </details>
 
     <details>
       <summary>可以收信，但寄不出去</summary>
-      <p>九成是寄件埠或加密設定錯。寄件一定要 <strong>smtp.hibox.biz</strong>、埠 <strong>587</strong>：
-      <br>• <strong>iPhone</strong>：SSL 要<strong>關閉</strong>（開著會握手失敗，寄不出去）
-      <br>• <strong>Android</strong>：安全類型選 <strong>STARTTLS</strong>
-      <br>改成 <strong>465</strong> 也會失敗（hiBox 沒開這個埠）。</p>
+      <p>九成是寄件的埠號或 SSL 設錯。寄件一定要 <code>smtp.hibox.biz</code>、埠 <strong>587</strong>：</p>
+      <p>• <strong>iPhone</strong>：進「進階 → 寄件伺服器 → 主要伺服器」，SSL 要<strong>關閉</strong><br>
+      • <strong>Android</strong>：安全類型選 <strong>STARTTLS</strong><br>
+      • 填 <strong>465</strong> 也會失敗（hiBox 沒開這個埠）</p>
     </details>
 
     <details>
       <summary>一直跳出「密碼錯誤」</summary>
-      <p>請確認：① 帳號要填<strong>完整信箱</strong>（不是只填前面的名字）② 大小寫要對 ③ 若近期改過密碼，手機要重新輸入。仍不行請找 MIS 確認帳號狀態。</p>
+      <p>① 帳號要填<strong>完整信箱</strong>（不是只填 @ 前面的名字）<br>
+      ② 大小寫要正確<br>
+      ③ 最近改過密碼的話，手機要重新輸入一次</p>
+      <p>還是不行，請找 MIS 確認帳號是否被鎖。</p>
     </details>
 
     <details>
       <summary>完全收不到新信</summary>
-      <p>先確認電腦的 Webmail 收得到（代表伺服器正常）。若 Webmail 有信、手機沒有，通常是手機設定選成了 <strong>POP3</strong>，請改用 <strong>IMAP</strong>。</p>
+      <p>先確認電腦的 Webmail 收得到（代表伺服器正常）：</p>
+      <p><a href="https://w3.hibox.biz/iwc_static/c11n/allDomain/layout/login.html" target="_blank" rel="noopener">→ 點此開 hiBox Webmail 確認</a></p>
+      <p>如果 Webmail 有信、手機沒有，通常是手機設定選成了 <strong>POP3</strong>，請改用 <strong>IMAP</strong>。</p>
     </details>
 
     <details>
       <summary>要選 IMAP 還是 POP3？</summary>
-      <p><strong>選 IMAP</strong>。信件會留在伺服器，手機、電腦、Webmail 看到的都一樣。POP3 會把信抓到單一裝置，容易發生「這台有、那台沒有」。</p>
-    </details>
-
-    <details>
-      <summary>按了「一鍵自動設定」，畫面卻說「請先以 Safari 開啟」</summary>
-      <p>因為 LINE、Facebook、Instagram 的<strong>內建瀏覽器</strong>無法下載 iPhone 描述檔。解法：<br>
-      ① 複製網址 <strong>hibox-phone-8438.onrender.com</strong><br>
-      ② 打開手機的 <strong>Safari</strong>，貼到網址列<br>
-      ③ 在 Safari 裡重新操作一次，就能下載安裝</p>
-    </details>
-
-    <details>
-      <summary>hiBox 的 App 還能下載嗎？</summary>
-      <p><strong>已經沒有了。</strong>中華電信原本的「hiBox全能信箱」App <strong>已從 App Store 下架</strong>，商店搜不到、舊連結也失效（這是很多人卡住的原因）。iPhone 請用最上面的<strong>一鍵自動設定</strong>，或用本篇手動設定；Android 請照手動步驟。</p>
+      <p><strong>選 IMAP。</strong>信件會留在伺服器，手機、電腦、Webmail 看到的都一樣。<br>
+      POP3 會把信抓到單一裝置，容易變成「這台有、那台沒有」。</p>
     </details>
   </section>
 
   <footer>
     <p class="brand">昶昕實業 · 資訊部 MIS</p>
-    <p style="margin-top:6px;">hiBox 手機設定說明 · 有問題請洽 MIS 分機</p>
+    <p style="margin-top:6px;">hiBox 手機設定說明 · 有問題請洽 MIS</p>
   </footer>
 
 </div>
